@@ -35,14 +35,13 @@
     //going through the array, locate the word index by taking the word order number and subtracting one
     //add the word to another array, slicing (maybe) off the number at the end
     //convert answer array to a string
-    
-    var sortSentence = function(s) {
-        let words = s.split(" ")
-        console.log(words)
-        for (i = 0; i < words.length; i++) {
-            wordIndex = words[i][words[i] - 1]
-            console.log(wordIndex)
-        }
+
+var sortSentence = function(s) {
+    const words = s.split(" ")
+    words.sort((a, b) => a.slice(-1) - b.slice(-1))
+    const slicedWords = words.map(word => word.slice(0, -1))
+    return slicedWords.join(" ")
 };
+
 console.log(sortSentence("is2 sentence4 This1 a3"))
 console.log(sortSentence("Myself2 Me1 I4 and3"))

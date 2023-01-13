@@ -50,6 +50,12 @@
 //     0 <= index[i] <= i
 
 const createTargetArray = (nums, index) => {
+    const newArray = []
+    for (let i = 0; i < nums.length; i++) {
+        let newIndex = index[i]
+        newArray.splice(newIndex, 0, nums[i])
+    }
+    return newArray
 }
 
 console.log(createTargetArray([0,1,2,3,4], [0,1,2,2,1]))

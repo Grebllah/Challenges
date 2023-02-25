@@ -31,6 +31,8 @@
 //answer is the sum of those batches
 
 
-const minPartitions = (n) => {
-
+const minPartitions = (digitString) => {
+    const digitArray = digitString.split("")
+    const numberArray = digitArray.map(digit => parseInt(digit))
+    return Math.max(numberArray)
 };

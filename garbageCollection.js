@@ -1,3 +1,5 @@
+// https://leetcode.com/problems/minimum-amount-of-time-to-collect-garbage/
+
 // You are given a 0-indexed array of strings garbage where garbage[i] represents the assortment of garbage at the ith
 // house.
 // garbage[i] consists only of the characters 'M', 'P' and 'G' representing one unit of metal, paper and glass garbage

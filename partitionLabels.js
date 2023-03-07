@@ -24,19 +24,33 @@
 const partitionLabels = (s) => {
     const letterTrackingObject = {}
     let currentEndPos = 0
+    const answerArray = []
     for (i = 0; i < s.length; i++) {
         let key = s[i]
         if (!letterTrackingObject[key]) letterTrackingObject[key] = [i, s.lastIndexOf(key)]
     }
+    const values = Object.entries(letterTrackingObject)
+    values.sort((a, b) => a[1][0] - b[1][0])
+    let currentChunk = values[0][1]
     while (currentEndPos < s.length) {
         currentEndPos++
-        const values = Object.entries(letterTrackingObject)
-        values.sort((a, b) => a[1][0] - b[1][0])
-        const currentChunk = values[0][1]
         console.log(currentChunk)
-        const valuesContained = values.filter(value => currentChunk[0] < value[1][0] < currentChunk[1])
-        console.log(valuesContained)
-
+        const valuesContained = values.filter(value => currentChunk[0] < value[1][0] && value[1][0] < currentChunk[1])
+        const valuesExceeding = valuesContained.filter(value => value[1][1] > currentChunk[1])
+        if (valuesExceeding.length) {
+            valuesExceeding.sort((a, b) => b[1][1] - a[1][1])
+            let maxExceed = valuesExceeding[0][1][1]
+            currentChunk = [currentChunk[0], maxExceed]
+        } else {
+            let chunk = currentChunk[1]-currentChunk[0] + 1
+            answerArray.push(chunk)
+            currentEndPos = currentChunk[1] + 1
+            const nextChunk = values.find(value => value[1][0] === currentEndPos)
+        console.log(nextChunk, "next chunk")
+            // currentChunk = nextChunk[1]
+        }
+        
+        console.log(valuesContained, valuesExceeding, answerArray)
     }
 }
 console.log(partitionLabels("ababcbacadefegdehijhklij"))

@@ -27,5 +27,15 @@ https://leetcode.com/problems/count-good-triplets/
 //     0 <= a, b, c <= 1000
 
 const countGoodTriplets = (arr, a, b, c) => {
-    
+    const potentialTrips = {}
+    for (i = 0; i < arr.length; i++) {
+        let firstOfTrip = arr[i]
+        for (j = i + 1; j < arr.length; j++)
+            if (arr[j] - arr[i]) {
+                if (!potentialTrips[key]) potentialTrips[key] = 1
+        else potentialTrips[key]++
+            }
+
+
+    }
 }

@@ -51,3 +51,23 @@
 //     1 <= garbage[i].length <= 10
 //     travel.length == garbage.length - 1
 //     1 <= travel[i] <= 100
+
+const garbageCollection = (garbage, travel) => {
+    const paperPickupTime = (garbage, travel) => {
+        let lastStop = garbage.lastIndexOf("P")
+        console.log(lastStop)
+        let sum = 0
+        for (i = 0; i < lastStop; i++) {
+            sum = sum + travel[i]
+        }
+        }
+    }
+//     const glassTruck = (g) => {
+
+//     }
+//     const metalTruck = (m) => {
+
+//     }
+//     const truckSum = paperTruck + glassTruck + metalTruck
+//     return truckSum
+console.log(lastStop, paperPickupTime(["G","P","GP","GG"], [2,4,3]))

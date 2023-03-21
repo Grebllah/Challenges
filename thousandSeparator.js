@@ -21,22 +21,27 @@ const thousandSeparator = (integer) => {
     const ansArr = []
     let firstDigits = []
     if (numsArr.length % 3 == 0) {
-        let firstDigits = numsArr.slice(0, 2)
+         firstDigits = ""
     }
     else {
-        let firstDigits = numsArr.slice(0, numsArr.length % 3)
+         firstDigits = numsArr.slice(0, numsArr.length % 3).join("")
     }
-    console.log(firstDigits)
     if (numsArr.length <= 3) {
         return integer.toString()
     }
     else {
         for (let i = numsArr.length - 3; i >= 0; i -= 3) {
-            console.log(i, numsArr.slice(i))
             ansArr.unshift(numsArr.slice(i, i + 3).join(""))
             ansArr.unshift(".")
         }
-    ansArr.unshift(firstDigits)
-    return ansArr.join("")
+    if (firstDigits) {
+        ansArr.unshift(firstDigits)
+        return ansArr.join("")
+        }
+    else {
+        return ansArr.join("").slice(1)
+        }
     }
 }
+console.log(thousandSeparator(123456789))
+

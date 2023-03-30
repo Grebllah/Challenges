@@ -1,7 +1,8 @@
 // https://leetcode.com/problems/minimum-adjacent-swaps-to-reach-the-kth-smallest-number/
 
 //You are given a string num, representing a large integer, and an integer k.
-// We call some integer wonderful if it is a permutation of the digits in num and is greater in value than num. There can be many wonderful integers. However, we only care about the smallest-valued ones.
+// We call some integer wonderful if it is a permutation of the digits in num and is greater in value than num.
+// There can be many wonderful integers. However, we only care about the smallest-valued ones.
 //     For example, when num = "5489355142":
 //         The 1st smallest wonderful integer is "5489355214".
 //         The 2nd smallest wonderful integer is "5489355241".
@@ -49,33 +50,58 @@
 //   and that would cascade until the swaps stop creating such a condition
 // do this k number of times, and the return of this process is the k'th lowest "wonderful" number.
 
-const getMinSwaps = (num, k) => {
-        let iterationCounter = 0
-        let currentNum = 0
-        let otherNum = 0
-        let indexNum = 0
-        for (let i = num.length - 1; i >= 0; i--) {
-            currentNum = num[i]
-            otherNum = num[i -1]
-            indexNum = i
-            console.log(iterationCounter, i, currentNum, otherNum, indexNum)
-        if (currentNum > otherNum) {
-            iterationCounter++
-            makeSwap(num, indexNum, currentNum, otherNum)
-            }
-        else continue
-        if (otherNum < num [i + 1]) {
-            i + 2
-        }
-        }
-}
+// const getMinSwaps = (num, k) => {
+//         let iterationCounter = 0
+//         let currentNum = 0
+//         let otherNum = 0
+//         let indexNum = 0
+//         let numArr = num.split("")
+//         for (let i = num.length - 1; i >= 0; i--) {
+//             currentNum = numArr[i]
+//             otherNum = numArr[i -1]
+    
+//             // console.log(iterationCounter, i, currentNum, otherNum, indexNum)
+//         if (currentNum > otherNum) {
+//             iterationCounter++
+//             makeSwap(numArr, i, currentNum, otherNum)
+//             }
+//         else continue
+//         if (otherNum < num [i + 1]) {
+//             i + 2
+//         }
+//         }
+// }
 
-const makeSwap = (num, index, pair1, pair2) => {
-    let numArr = num.split("")
-    let swapNum = pair1
-    numArr[index] = pair2
-    numArr[index - 1] = swapNum
-    let newNum = numArr.join("")
-    return newNum
+// const makeSwap = (numArr, i, currentNum, otherNum) => {
+//     let swapNum = currentNum
+//     numArr[i] = otherNum
+//     numArr[i - 1] = swapNum
+//     }
+
+const findNextWonder = (numStr) => {
+    const numsArr = numStr.split("").map(num => parseInt(num))
+    const seenNums = []
+    for (let i = numsArr.length - 1; i >= 0; i--) {
+        let currentNum = numsArr[i]
+        if (!seenNums.every(num => num < currentNum)) {
+            seenNums.sort((a , b) => a - b)
+            const index = seenNums.findIndex(num => num > currentNum)
+            numsArr[i] = seenNums[index]
+            seenNums[index] = currentNum
+            // console.log(seenNums, filteredSeenNums, "swap!")
+            // let poppedNum = seenNums.pop()
+            // numsArr[i] = poppedNum
+            // seenNums.push(currentNum)
+            
+            return [...numsArr.slice(0, i + 1), ...seenNums].join("")
+        } else {
+            seenNums.push(currentNum)
+        }
+        // console.log(seenNums)
     }
-getMinSwaps("5489355142", 4)
+    return numsArr
+
+}
+console.log(findNextWonder("5489355142"), findNextWonder("5489355214"), findNextWonder("5489355241"), findNextWonder("5489355412"))
+// "5489355214"
+// getMinSwaps("5489355142", 4)

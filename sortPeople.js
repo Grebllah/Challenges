@@ -33,19 +33,18 @@ const sortPeople = (names, heights) => {
     const n = names.length
     const heightChart = []
     let height = 0
+
     for (let i = 0; i < n; i++) {
         height = heights[i]
         heightChart.push([heights[i], names[i]])
     }
-    const sortedChart = heightChart.sort((a, b) => {
-        b[0] - a[0]
-        }
-        )
+
+    heightChart.sort((a, b) => b[0] - a[0])
     const sortedNames = []
-    for (let i = 0; i < sortedChart.length; i++) {
-        sortedNames.push(sortedChart[i][1])
+
+    for (let i = 0; i < heightChart.length; i++) {
+        sortedNames.push(heightChart[i][1])
     }
-    console.log(sortedChart, sortedNames)
-        return sortedNames.reverse()
+    return sortedNames
 }
 sortPeople(["Mary","John","Emma"], [180,165,170])

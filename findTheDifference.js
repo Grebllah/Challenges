@@ -20,13 +20,11 @@
 
 const findTheDifference = (s, t) => {
     const letterFinder = {}
-    const answer = []
     for (let i = 0; i < t.length; i++) {
         let key = t[i]
         if (!letterFinder[key]) letterFinder[key] = 1
         else letterFinder[key]++
     }
-    console.log(letterFinder)
     for (let i = 0; i < s.length; i++) {
         key = s[i]
         letterFinder[key]--
@@ -34,9 +32,7 @@ const findTheDifference = (s, t) => {
     for (let i = 0; i < t.length; i++) {
         key = t[i]
         if (letterFinder[key] >= 1) {
-            answer.push(t[i])
-            console.log("answer:", answer.join(""))
-            return answer.join("")
+            return t[i]
             }
         }
     }
